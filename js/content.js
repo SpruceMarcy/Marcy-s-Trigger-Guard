@@ -1,34 +1,30 @@
 
 function main(){
-	//chrome.storage.sync.get(["triggers"]).then((result) => {
-	//	buildACDS(result.triggers)
-	//});
 
-	mutateTextNodesUnder(document.body)
+	chrome.storage.sync.get(["caseSensitive"], function(result) {
+		caseSensitive = result.caseSensitive
+		
+		mutateTextNodesUnder(document.body, caseSensitive)
 
-	const config = { attributes: false, childList: true, subtree: true };
-
-	const callback = (mutationList, observer) => {
-	for (const mutation of mutationList) {
-		if (mutation.type === 'childList') {
-		mutation.addedNodes.forEach(node => {
-			mutateTextNodesUnder(node)
-		})
+		const config = { attributes: false, childList: true, subtree: true };
+		const callback = (mutationList, observer) => {
+		for (const mutation of mutationList) {
+			if (mutation.type === 'childList') {
+			mutation.addedNodes.forEach(node => {
+				mutateTextNodesUnder(node, caseSensitive)
+			})
+			}
 		}
-	}
-	};
+		};
 
-	const observer = new MutationObserver(callback);
-	observer.observe(document.body, config);
+		const observer = new MutationObserver(callback);
+		observer.observe(document.body, config);
+	})
 }
 
-//function buildACDS(triggers){
-//
-//}
-
-function mutateTextNodesUnder(node){
+function mutateTextNodesUnder(node, caseSensitive){
 	textNodesUnder(node).forEach(subNode => {
-		mutateTextNode(subNode)
+		mutateTextNode(subNode, caseSensitive)
 	})
 }
 
@@ -39,15 +35,18 @@ function textNodesUnder(el){
 	return a;
 }
 
-function mutateTextNode(node){
-	chrome.storage.sync.get(["triggers"], function(result) {
+function mutateTextNode(node, caseSensitive){
+	chrome.storage.sync.get(["triggers"], function(data) {
 		text = node.nodeValue
-		result.triggers.forEach(trigger =>{
-			if (text.indexOf(trigger)>-1){
-				console.log(text)
-				console.log(trigger)
-				text = text.replace(trigger,"[blocked]")
-			}
+		processedText = caseSensitive ? text : text.toLowerCase()
+		data.triggers.forEach(trigger =>{
+			processedTrigger = caseSensitive ? trigger : trigger.toLowerCase()
+			matchIndex = processedText.indexOf(processedTrigger)
+			while (matchIndex>-1){
+				matchTrigger = text.substr(matchIndex,trigger.length)
+				text = text.replace(matchTrigger,"█████████")
+				matchIndex = processedText.indexOf(processedTrigger,matchIndex+1)
+			} 
 		}) 
 		node.nodeValue = text
 	});

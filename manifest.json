@@ -7,6 +7,10 @@
       "js": [ "js/content.js" ],
       "matches": [ "\u003Call_urls>" ]
    } ],
+   "options_ui": {
+      "page": "html/options.html",
+      "open_in_tab": true
+    },
    "content_security_policy": "default-src 'self'",
    "description": "Removes custom text from sight. By Marcy.",
    "icons": {

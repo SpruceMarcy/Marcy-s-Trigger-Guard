@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcy's Jammie Dodger</title>
+    <link href="../css/options.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <figure class="logo">
+            <img src="../icons/icon-128.png" />
+        </figure>
+        <div>
+            <h2>Marcy's Trigger Guard</h2>
+			<h3>Options and Settings</h3>
+
+        </div>
+    </div>
+    <hr/>
+    <br/>
+    <div class="centered">  
+        <input type="checkbox" id="caseSensitive" name="caseSensitive" value="true">
+        <label for="caseSensitive">Case Sensitive</label>
+    </div>
+    <br/>
+    <hr/>
+    <br/>
+    <div class="centered">    
+        <div class="centered">    
+            <input id = "inputTrigger"/>
+            <button id = "addTrigger">Add</button>
+        </div>
+        <div class = "grid" id = "triggerList">
+        </div>
+    </div>
+
+    <script src="../js/options.js"></script>
+</body>
+
+</html>
