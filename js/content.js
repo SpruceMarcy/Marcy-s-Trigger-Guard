@@ -87,3 +87,12 @@ function tokenise(word, config) {
 }
 
 main()
+
+chrome.runtime.onMessage.addListener(
+	function (message) {
+		if (message === "TriggerGuardRunMain") {
+			main()
+		}
+
+	}
+);
