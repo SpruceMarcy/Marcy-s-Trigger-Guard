@@ -52,7 +52,7 @@ function findAll(str, substr) {
 	caret = 0
 	while ((index = str.indexOf(substr, caret)) > -1) {
 		matches.push(index)
-		caret = index + substr.length
+		caret = index + 1//substr.length
 	}
 	return matches
 }
@@ -61,9 +61,11 @@ function censorAtIndices(str, indices, gap, replacement) {
 	substrings = []
 	lastIndex = 0
 	indices.forEach(index => {
-		substrings.push(str.substring(lastIndex, index))
+		if (index >= lastIndex) {
+			substrings.push(str.substring(lastIndex, index))
+			substrings.push(replacement)
+		}
 		lastIndex = index + gap
-		substrings.push(replacement)
 	})
 	substrings.push(str.substring(lastIndex))
 	return substrings.join('')
