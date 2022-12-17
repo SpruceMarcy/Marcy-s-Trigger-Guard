@@ -38,34 +38,36 @@ function textNodesUnder(el) {
 
 function censorTextNode(node, config) {
 	text = node.nodeValue
+	allMatches = []
 	config.triggers.forEach(trigger => {
 		tokenisedText = tokenise(text, config)
-		matches = findAll(tokenisedText, trigger)
-		censorValue = config.censorOption === "Per" ? config.censorValue.repeat(trigger.length) : config.censorValue
-		text = censorAtIndices(text, matches, trigger.length, censorValue)
+		allMatches = allMatches.concat(findAll(tokenisedText, trigger, config))
 	})
+	allMatches.sort((a, b) => { return a['i'] - b['i'] });
+	text = censorAtIndices(text, allMatches)
 	node.nodeValue = text
 }
 
-function findAll(str, substr) {
+function findAll(str, substr, config) {
 	matches = []
 	caret = 0
+	censorValue = config.censorOption === "Per" ? config.censorValue.repeat(substr.length) : config.censorValue
 	while ((index = str.indexOf(substr, caret)) > -1) {
-		matches.push(index)
-		caret = index + 1//substr.length
+		matches.push({ 'i': index, 'l': substr.length, 'c': censorValue })
+		caret = index + 1
 	}
 	return matches
 }
 
-function censorAtIndices(str, indices, gap, replacement) {
+function censorAtIndices(str, indices) {
 	substrings = []
 	lastIndex = 0
 	indices.forEach(index => {
-		if (index >= lastIndex) {
-			substrings.push(str.substring(lastIndex, index))
-			substrings.push(replacement)
+		if (index['i'] >= lastIndex) {
+			substrings.push(str.substring(lastIndex, index['i']))
+			substrings.push(index['c'])
 		}
-		lastIndex = index + gap
+		lastIndex = index['i'] + index['l']
 	})
 	substrings.push(str.substring(lastIndex))
 	return substrings.join('')
