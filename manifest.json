@@ -3,27 +3,35 @@
       "default_popup": "html/popup.html",
       "default_title": "Marcy's Trigger Guard"
    },
-   "content_scripts": [ {
-      "js": [ "js/content.js" ],
-      "matches": [ "\u003Call_urls>" ]
-   } ],
+   "content_scripts": [
+      {
+         "js": [
+            "js/common.js",
+            "js/content.js"
+         ],
+         "matches": [
+            "\u003Call_urls>"
+         ],
+         "run_at": "document_start"
+      }
+   ],
    "options_ui": {
       "page": "html/options.html",
       "open_in_tab": true
-    },
+   },
    "content_security_policy": "default-src 'self'",
    "description": "Removes custom text from sight. By Marcy.",
    "icons": {
       "128": "icons/icon-128.png",
       "16": "icons/icon-16.png",
-	  "32": "icons/icon-32.png",
+      "32": "icons/icon-32.png",
       "48": "icons/icon-48.png",
-	  "64": "icons/icon-64.png"
+      "64": "icons/icon-64.png"
    },
    "manifest_version": 2,
    "name": "Marcy's Trigger Guard",
    "permissions": [
       "storage"
-    ],
+   ],
    "version": "0.0.1"
 }

@@ -1,18 +1,19 @@
-$ = function(e){return document.getElementById(e)}
-$("addTrigger").onclick = function() {
+$ = function (e) { return document.getElementById(e) }
+$("addTrigger").onclick = function () {
     newTrigger = $("inputTrigger").value
-    chrome.storage.sync.get(["triggers"], function(result) {
-        console.log(result)
-        newTriggers = result.triggers
+    storageGet(["triggers"], function (config) {
+        if (!config.triggers) { config.triggers = [] }
+        console.log(config)
+        newTriggers = config.triggers
         newTriggers.push(newTrigger)
-        chrome.storage.sync.set({ "triggers": newTriggers }, function() {
+        storageSet({ "triggers": newTriggers }, function () {
             console.log("Value is set to " + newTriggers);
             addToTriggerList(newTrigger)
         });
     })
 }
 
-function addToTriggerList(trigger){
+function addToTriggerList(trigger) {
     tl = $("triggerList")
 
     let div1 = document.createElement('div')
@@ -30,12 +31,12 @@ function addToTriggerList(trigger){
     div2.appendChild(p2)
     p2.appendChild(a)
 
-    a.onclick = function(){
-        chrome.storage.sync.get(["triggers"], function(result) {
+    a.onclick = function () {
+        storageGet(["triggers"], function (result) {
             newTriggers = result.triggers
             index = newTriggers.indexOf(trigger)
-            newTriggers.splice(index,1)
-            chrome.storage.sync.set({ "triggers": newTriggers }, function() {
+            newTriggers.splice(index, 1)
+            storageSet({ "triggers": newTriggers }, function () {
                 console.log("Value is set to " + newTriggers);
                 tl.removeChild(div1)
                 tl.removeChild(div2)
@@ -44,9 +45,10 @@ function addToTriggerList(trigger){
     }
 }
 
-function updateTriggerList(){
-    chrome.storage.sync.get(["triggers"], function(result) {
-        result.triggers.forEach(trigger => {
+function updateTriggerList() {
+    storageGet(["triggers"], function (config) {
+        if (!config.triggers) { return }
+        config.triggers.forEach(trigger => {
             addToTriggerList(trigger)
         });
     })
@@ -54,10 +56,59 @@ function updateTriggerList(){
 
 updateTriggerList()
 
+// Give functionality to buttons
 csCheckbox = $("caseSensitive")
 csCheckbox.addEventListener('change', (event) => {
-    chrome.storage.sync.set({ "caseSensitive": event.currentTarget.checked}, function(){});
+    storageSet({ "caseSensitive": event.currentTarget.checked }, null);
 })
-chrome.storage.sync.get(["caseSensitive"], function(result) {
-    csCheckbox.checked = result.caseSensitive
+
+blackoutAllRadio = $("blackoutAll")
+blackoutAllRadio.onchange = function () {
+    storageSet({ "censorOption": "All", "censorValue": "█████" }, null)
+}
+blackoutPerRadio = $("blackoutPer")
+blackoutPerRadio.onchange = function () {
+    storageSet({ "censorOption": "Per", "censorValue": "█" }, null)
+}
+underscoreAllRadio = $("underscoreAll")
+underscoreAllRadio.onchange = function () {
+    storageSet({ "censorOption": "All", "censorValue": "-----" }, null)
+}
+underscorePerRadio = $("underscorePer")
+underscorePerRadio.onchange = function () {
+    storageSet({ "censorOption": "Per", "censorValue": "-" }, null)
+}
+customCensorRadio = $("customCensor")
+customCensorTextbox = $("customCensorValue")
+handleCustomCensor = function () {
+    storageSet({ "censorOption": "Custom", "censorValue": customCensorTextbox.value }, null)
+}
+customCensorRadio.onchange = handleCustomCensor
+customCensorTextbox.oninput = handleCustomCensor
+
+// Set defaults
+storageGet(["caseSensitive"], function (config) {
+    csCheckbox.checked = config.caseSensitive
+})
+
+storageGet(["censorOption", "censorValue"], function (config) {
+    switch (config.censorOption) {
+        case "All":
+            if (config.censorValue === "█████") {
+                blackoutAllRadio.checked = true
+            } else if (config.censorValue === "-----") {
+                underscoreAllRadio.checked = true
+            }
+            break;
+        case "Per":
+            if (config.censorValue === "█") {
+                blackoutPerRadio.checked = true
+            } else if (config.censorValue === "-") {
+                underscorePerRadio.checked = true
+            }
+            break;
+        default:
+            customCensorRadio.checked = true
+            customCensorTextbox.value = config.censorValue
+    }
 })

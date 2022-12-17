@@ -1,7 +1,7 @@
 @media (prefers-color-scheme: light) {
     body {
         background-color: var(--bs-light) !important;
-        color:var(--bs-dark);
+        color: var(--bs-dark);
     }
 }
 
@@ -28,13 +28,26 @@ body {
     margin-bottom: 35px;
 }
 
-.centered{
+h3 {
+    text-align: center;
+}
+
+.centered {
     display: table;
     margin-left: auto;
     margin-right: auto;
 }
 
-.grid{
+#optionGrid {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+}
+
+#optionGrid label {
+    display: block;
+}
+
+.grid {
     grid-template-columns: auto min-content;
     display: grid;
 }
@@ -42,4 +55,38 @@ body {
 .logo img {
     width: 64px;
     height: 64px;
+}
+
+input[name="collapse"] {
+    display: none;
+}
+
+#collapseLabel {
+    background-color: beige;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    display: block;
+}
+
+#collapseLabel:hover {
+    background-color: rgb(230, 230, 212);
+}
+
+#collapseLabel:active {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+
+}
+
+#triggerList {
+    background: #fff;
+    overflow: hidden;
+    height: 0;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+input[name="collapse"]:checked~#triggerList {
+    height: auto;
 }
