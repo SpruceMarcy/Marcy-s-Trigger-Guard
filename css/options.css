@@ -1,22 +1,9 @@
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: var(--bs-light) !important;
-        color: var(--bs-dark);
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--bs-dark) !important;
-        color: var(--bs-light);
-    }
-}
-
 * {
     box-sizing: border-box;
 }
 
 body {
+    font-family: sans-serif;
     min-width: 265px;
     font-size: 100%;
     background-image: url('../images/stripes.png');
@@ -32,6 +19,7 @@ main {
 
 .header {
     display: flex;
+    margin-bottom: 1em;
 }
 
 .header * {
@@ -85,7 +73,7 @@ h4 {
 .logo img {
     width: 64px;
     height: 64px;
-    margin: 0.5em;
+    margin-right: 0.5em;
 }
 
 input[name="collapse"],

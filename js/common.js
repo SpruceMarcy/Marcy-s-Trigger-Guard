@@ -1,5 +1,5 @@
 function storageGet(key, callback) {
-    if (browser) {
+    if (!typeof browser === "undefined") {
         return browser.storage.sync.get(key, callback)
     }
     if (chrome) {
@@ -8,7 +8,7 @@ function storageGet(key, callback) {
 }
 
 function storageSet(data, callback) {
-    if (browser) {
+    if (!typeof browser === "undefined") {
         return browser.storage.sync.set(data, callback)
     }
     if (chrome) {
