@@ -13,6 +13,16 @@
             "\u003Call_urls>"
          ],
          "run_at": "document_start"
+      },
+      {
+         "js": [
+            "js/common.js",
+            "js/content.js"
+         ],
+         "matches": [
+            "\u003Call_urls>"
+         ],
+         "run_at": "document_idle"
       }
    ],
    "background": {

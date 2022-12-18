@@ -18,8 +18,12 @@ function main() {
 				}
 			}
 		};
-		const observer = new MutationObserver(callback);
+		if (observer) {
+			observer.disconnect()
+		}
+		observer = new MutationObserver(callback);
 		observer.observe(basalNode, moConfig);
+		console.log("activating", basalNode)
 	})
 }
 
@@ -87,6 +91,8 @@ function tokenise(word, config) {
 	word = config.caseSensitive ? word : word.toLowerCase()
 	return word
 }
+
+var observer
 
 main()
 
