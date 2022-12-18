@@ -44,27 +44,63 @@
                     <h4>Replacement</h4>
                     <input type="radio" id="blackoutAll" name="censorOption" value="blackoutAll">
                     <label for="blackoutAll" class="button">
-                        Blackout with fixed length
-                        <br>
-                        <dd>every trigger becomes "█████"</dd>
+                        <span>
+                            Blackout with fixed length
+                            <input type="checkbox" id="BAHelpCheckbox" name="helpCheckbox" class="helpCheckbox">
+                            <label for="BAHelpCheckbox" class="helpLabel">?</label>
+                            <div class="helpWrapper">
+                                <p>Every trigger word is blacked out with: █████</p>
+                                <ul>
+                                    <li>"abc" becomes "█████"</li>
+                                    <li>"abcdefghij" becomes "█████"</li>
+                                </ul>
+                            </div>
+                        </span>
                     </label>
                     <input type="radio" id="blackoutPer" name="censorOption" value="blackoutPer">
                     <label for="blackoutPer" class="button">
-                        Blackout with varying length
-                        <br>
-                        <dd>"abc" becomes "███" and "abcdef" becomes "██████"</dd>
+                        <span>
+                            Blackout with varying length
+                            <input type="checkbox" id="BPHelpCheckbox" name="helpCheckbox" class="helpCheckbox">
+                            <label for="BPHelpCheckbox" class="helpLabel">?</label>
+                            <div class="helpWrapper">
+                                <p>Trigger words are blacked out with ██ depending on their length</p>
+                                <ul>
+                                    <li>"abc" becomes "███"</li>
+                                    <li>"abcdefghij" becomes "██████████"</li>
+                                </ul>
+                            </div>
+                        </span>
                     </label>
                     <input type="radio" id="underscoreAll" name="censorOption" value="underscoreAll">
                     <label for="underscoreAll" class="button">
-                        Dashes with fixed length
-                        <br>
-                        <dd>every trigger becomes "-----"</dd>
+                        <span>
+                            Dashes with fixed length
+                            <input type="checkbox" id="UAHelpCheckbox" name="helpCheckbox" class="helpCheckbox">
+                            <label for="UAHelpCheckbox" class="helpLabel">?</label>
+                            <div class="helpWrapper">
+                                <p>Every trigger word is censored with: -----</p>
+                                <ul>
+                                    <li>"abc" becomes "-----"</li>
+                                    <li>"abcdefghij" becomes "-----"</li>
+                                </ul>
+                            </div>
+                        </span>
                     </label>
                     <input type="radio" id="underscorePer" name="censorOption" value="underscorePer">
                     <label for="underscorePer" class="button">
-                        Dashes with varying length
-                        <br>
-                        <dd>"abc" becomes "---" and "abcdef" becomes "------"</dd>
+                        <span>
+                            Dashes with varying length
+                            <input type="checkbox" id="UPHelpCheckbox" name="helpCheckbox" class="helpCheckbox">
+                            <label for="UPHelpCheckbox" class="helpLabel">?</label>
+                            <div class="helpWrapper">
+                                <p>Trigger words are censored with - depending on their length</p>
+                                <ul>
+                                    <li>"abc" becomes "---"</li>
+                                    <li>"abcdefghij" becomes "----------"</li>
+                                </ul>
+                            </div>
+                        </span>
                     </label>
                     <input type="radio" id="customCensor" name="censorOption" value="customCensor">
                     <label for="customCensor" class="button">

@@ -73,7 +73,7 @@ h4 {
     margin: 0.5em;
 }
 
-#optionGrid label {
+#optionGrid>*>label {
     display: block;
 }
 
@@ -133,4 +133,46 @@ input[type="radio"]:checked {
 
 input[name="collapse"]:checked~#triggerList {
     height: auto;
+}
+
+.helpLabel {
+    margin: auto;
+    background-color: #3dce4a;
+    width: 1.35em;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.helpLabel:hover {
+    background-color: palegreen;
+}
+
+.helpLabel:active {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+}
+
+.helpWrapper {
+    overflow: hidden;
+    max-height: 0;
+    background-color: aliceblue;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+    transition: max-height 0.5s, padding-top 0.5s, padding-bottom 0.5s, margin-top 0.5s;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.helpWrapper * {
+    margin: 0;
+}
+
+input[name="helpCheckbox"]:checked~.helpWrapper {
+    max-height: 7em;
+    padding: 1em;
+    margin-top: 0.5em;
+}
+
+span>label {
+    display: inline;
 }
