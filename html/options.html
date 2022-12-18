@@ -9,74 +9,78 @@
 </head>
 
 <body>
-    <div class="header">
-        <figure class="logo">
-            <img src="../icons/icon-128.png" />
-        </figure>
-        <div>
-            <h1>Marcy's Trigger Guard</h1>
-            <h2>Options and Settings</h2>
-        </div>
-    </div>
-    <hr />
-    <h3>Options</h3>
-    <div class="centered">
-        <div id="optionGrid">
-            <div>
-                <label for="caseSensitive">
-                    <input type="checkbox" id="caseSensitive" name="caseSensitive" value="true">
-                    Case Sensitive
-                </label>
-            </div>
-            <div>
-                <label for="blackoutAll">
-                    <input type="radio" id="blackoutAll" name="censorOption" value="blackoutAll">
-                    Blackout with fixed length
-                    <br>
-                    <dd>every trigger becomes "█████"</dd>
-                </label>
-                <label for="blackoutPer">
-                    <input type="radio" id="blackoutPer" name="censorOption" value="blackoutPer">
-                    Blackout with varying length
-                    <br>
-                    <dd>"abc" becomes "███" and "abcdef" becomes "██████"</dd>
-                </label>
-                <label for="underscoreAll">
-                    <input type="radio" id="underscoreAll" name="censorOption" value="underscoreAll">
-                    Dashes with fixed length
-                    <br>
-                    <dd>every trigger becomes "-----"</dd>
-                </label>
-                <label for="underscorePer">
-                    <input type="radio" id="underscorePer" name="censorOption" value="underscorePer">
-                    Dashes with varying length
-                    <br>
-                    <dd>"abc" becomes "---" and "abcdef" becomes "------"</dd>
-                </label>
-                <label for="customCensor">
-                    <input type="radio" id="customCensor" name="censorOption" value="customCensor">
-                    Custom censor
-                </label>
-                <input type="text" id="customCensorValue">
+    <main>
+        <div class="header">
+            <div class="headerGrid">
+                <figure class="logo">
+                    <img src="../icons/icon-128.png" />
+                </figure>
+                <div>
+                    <h1>Marcy's Trigger Guard</h1>
+                    <h2>Options and Settings</h2>
+                </div>
             </div>
         </div>
-    </div>
-    <br />
-    <hr />
-    <h3>Manage Word List</h3>
-    <div class="centered">
+        <hr />
+        <h3>Options</h3>
         <div class="centered">
-            <form name="addForm">
-                <input id="inputTrigger" />
-                <button id="addTrigger">Add</button>
-            </form>
+            <div id="optionGrid">
+                <div>
+                    <label for="caseSensitive" class="button">
+                        <input type="checkbox" id="caseSensitive" name="caseSensitive" value="true">
+                        Case Sensitive
+                    </label>
+                </div>
+                <div>
+                    <label for="blackoutAll" class="button">
+                        <input type="radio" id="blackoutAll" name="censorOption" value="blackoutAll">
+                        Blackout with fixed length
+                        <br>
+                        <dd>every trigger becomes "█████"</dd>
+                    </label>
+                    <label for="blackoutPer" class="button">
+                        <input type="radio" id="blackoutPer" name="censorOption" value="blackoutPer">
+                        Blackout with varying length
+                        <br>
+                        <dd>"abc" becomes "███" and "abcdef" becomes "██████"</dd>
+                    </label>
+                    <label for="underscoreAll" class="button">
+                        <input type="radio" id="underscoreAll" name="censorOption" value="underscoreAll">
+                        Dashes with fixed length
+                        <br>
+                        <dd>every trigger becomes "-----"</dd>
+                    </label>
+                    <label for="underscorePer" class="button">
+                        <input type="radio" id="underscorePer" name="censorOption" value="underscorePer">
+                        Dashes with varying length
+                        <br>
+                        <dd>"abc" becomes "---" and "abcdef" becomes "------"</dd>
+                    </label>
+                    <label for="customCensor" class="button">
+                        <input type="radio" id="customCensor" name="censorOption" value="customCensor">
+                        Custom censor:
+                        <input type="text" id="customCensorValue">
+                    </label>
+                </div>
+            </div>
         </div>
-        <p id="addMessage"></p>
-        <input type="checkbox" name="collapse" id="collapseBox">
-        <label for="collapseBox" id="collapseLabel">Click to hide/show list of triggers</label>
-        <div class="grid" id="triggerList">
+        <br />
+        <hr />
+        <h3>Manage Word List</h3>
+        <div class="centered">
+            <div class="centered">
+                <form name="addForm">
+                    <input id="inputTrigger" />
+                    <button id="addTrigger">Add</button>
+                </form>
+            </div>
+            <p id="addMessage"></p>
+            <input type="checkbox" name="collapse" id="collapseBox">
+            <label for="collapseBox" id="collapseLabel" class="button">Click to hide/show list of triggers</label>
+            <div class="grid" id="triggerList">
+            </div>
         </div>
-    </div>
+    </main>
     <script src="../js/common.js"></script>
     <script src="../js/options.js"></script>
 </body>

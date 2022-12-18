@@ -18,14 +18,35 @@
 
 body {
     min-width: 265px;
-    padding: 10px;
     font-size: 100%;
+    background-image: url('../images/stripes.png');
+}
+
+main {
+    background-color: lightcyan;
+    margin: 2em;
+    padding: 2em;
+    border-radius: 3em;
+    box-shadow: 0 0 1em;
 }
 
 .header {
-    margin-top: 10px;
-    text-align: center;
-    margin-bottom: 35px;
+    display: flex;
+}
+
+.header * {
+    white-space: nowrap;
+}
+
+.headerGrid {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: min-content min-content;
+}
+
+.headerGrid * {
+    margin: 0;
 }
 
 h3 {
@@ -55,27 +76,30 @@ h3 {
 .logo img {
     width: 64px;
     height: 64px;
+    margin: 0.5em;
 }
 
 input[name="collapse"] {
     display: none;
 }
 
-#collapseLabel {
+.button {
     background-color: beige;
-    text-align: center;
     width: 100%;
     padding: 10px;
     display: block;
 }
 
-#collapseLabel:hover {
+.button:hover {
     background-color: rgb(230, 230, 212);
 }
 
-#collapseLabel:active {
+.button:active {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+}
 
+input[type="radio"]:checked {
+    background-color: rgb(230, 230, 212)
 }
 
 #triggerList {
