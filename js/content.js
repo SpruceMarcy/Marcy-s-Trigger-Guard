@@ -93,6 +93,5 @@ chrome.runtime.onMessage.addListener(
 		if (message === "TriggerGuardRunMain") {
 			main()
 		}
-
 	}
 );

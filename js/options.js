@@ -1,16 +1,25 @@
 $ = function (e) { return document.getElementById(e) }
 $("addTrigger").onclick = function () {
     newTrigger = $("inputTrigger").value
-    storageGet(["triggers"], function (config) {
-        if (!config.triggers) { config.triggers = [] }
-        console.log(config)
-        newTriggers = config.triggers
-        newTriggers.push(newTrigger)
-        storageSet({ "triggers": newTriggers }, function () {
-            console.log("Value is set to " + newTriggers);
-            addToTriggerList(newTrigger)
-        });
-    })
+    if (isValidInput(newTrigger)) {
+        storageGet(["triggers"], function (config) {
+            if (!config.triggers) { config.triggers = [] }
+            newTriggers = config.triggers
+            newTriggers.push(newTrigger)
+            storageSet({ "triggers": newTriggers }, function () {
+                $("inputTrigger").value = ""
+                $("addMessage").innerText = "Phrase successfully added"
+                addToTriggerList(newTrigger)
+            });
+        })
+    } else {
+        $("addMessage").innerText = "Invalid Entry"
+    }
+    return false
+}
+
+$("inputTrigger").oninput = function () {
+    $("addMessage").innerText = ""
 }
 
 function addToTriggerList(trigger) {
@@ -23,7 +32,7 @@ function addToTriggerList(trigger) {
     let a = document.createElement('a');
     p1.textContent = trigger;
     a.textContent = "delete"
-    a.href = "#"
+    a.href = "javascript:void(0)"
 
     tl.appendChild(div1)
     tl.appendChild(div2)

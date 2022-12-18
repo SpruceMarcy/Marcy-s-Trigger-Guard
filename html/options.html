@@ -66,9 +66,12 @@
     <h3>Manage Word List</h3>
     <div class="centered">
         <div class="centered">
-            <input id="inputTrigger" />
-            <button id="addTrigger">Add</button>
+            <form name="addForm">
+                <input id="inputTrigger" />
+                <button id="addTrigger">Add</button>
+            </form>
         </div>
+        <p id="addMessage"></p>
         <input type="checkbox" name="collapse" id="collapseBox">
         <label for="collapseBox" id="collapseLabel">Click to hide/show list of triggers</label>
         <div class="grid" id="triggerList">

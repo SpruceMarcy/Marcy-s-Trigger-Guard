@@ -15,3 +15,10 @@ function storageSet(data, callback) {
         return browser.storage.sync.set(data, callback)
     }
 }
+
+function isValidInput(word) {
+    if (word.length == 0) {
+        return false
+    }
+    return true
+}

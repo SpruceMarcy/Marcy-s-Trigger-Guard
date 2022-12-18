@@ -8,13 +8,15 @@ chrome.runtime.onInstalled.addListener(function () {
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
     newTrigger = info.selectionText
-    storageGet(["triggers"], function (config) {
-        if (!config.triggers) { config.triggers = [] }
-        console.log(config)
-        newTriggers = config.triggers
-        newTriggers.push(newTrigger)
-        storageSet({ "triggers": newTriggers }, function () {
-            chrome.tabs.sendMessage(tab.id, "TriggerGuardRunMain")
-        });
-    })
+    if (isValidInput(newTrigger)) {
+        storageGet(["triggers"], function (config) {
+            if (!config.triggers) { config.triggers = [] }
+            console.log(config)
+            newTriggers = config.triggers
+            newTriggers.push(newTrigger)
+            storageSet({ "triggers": newTriggers }, function () {
+                chrome.tabs.sendMessage(tab.id, "TriggerGuardRunMain")
+            });
+        })
+    }
 })
