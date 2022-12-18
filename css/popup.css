@@ -1,7 +1,7 @@
 @media (prefers-color-scheme: light) {
     body {
         background-color: var(--bs-light) !important;
-        color:var(--bs-dark);
+        color: var(--bs-dark);
     }
 }
 
@@ -20,7 +20,16 @@
 
 body {
     min-width: 265px;
-    padding: 10px;
+    font-size: 100%;
+    background-image: url('../images/stripes.png');
+}
+
+main {
+    background-color: lightcyan;
+    margin: 0.5em;
+    padding: 2em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em;
 }
 
 .header {

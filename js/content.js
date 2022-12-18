@@ -30,7 +30,7 @@ function mutateTextNodesUnder(node, config) {
 }
 
 function textNodesUnder(el) {
-	filter = (node) => (['SCRIPT', 'STYLE'].includes(node.parentNode.tagName) || node.nodeValue.trim() === '' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
+	filter = (node) => (['script', 'style'].includes(node.parentNode.tagName.toLowerCase()) || node.nodeValue.trim() === '' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
 	var n, a = [], walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, filter, false);
 	while (n = walk.nextNode()) a.push(n);
 	return a;
@@ -43,9 +43,11 @@ function censorTextNode(node, config) {
 		tokenisedText = tokenise(text, config)
 		allMatches = allMatches.concat(findAll(tokenisedText, trigger, config))
 	})
-	allMatches.sort((a, b) => { return (a['i'] - b['i'] || a['l'] - b['l']) });
-	text = censorAtIndices(text, allMatches)
-	node.nodeValue = text
+	if (allMatches.length != 0) {
+		allMatches.sort((a, b) => { return (a['i'] - b['i'] || a['l'] - b['l']) });
+		text = censorAtIndices(text, allMatches)
+		node.nodeValue = text
+	}
 }
 
 function findAll(str, substr, config) {

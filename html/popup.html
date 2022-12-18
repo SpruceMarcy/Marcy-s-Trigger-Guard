@@ -4,28 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcy's Jammie Dodger</title>
+    <title>Marcy's Trigger Guard</title>
     <link href="../css/popup.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="header">
-        <figure class="logo">
-            <img src="../icons/icon-128.png" />
-        </figure>
-        <div>
-            <h2>Marcy's Trigger Guard</h2>
-            <h3>Blocking triggering words from your page!</h3>
+    <main>
+        <div class="header">
+            <figure class="logo">
+                <img src="../icons/icon-128.png" />
+            </figure>
+            <div>
+                <h2>Marcy's Trigger Guard</h2>
+                <h3>Blocking triggering words from your page!</h3>
+                <br />
+                <form name="quickAddForm">
+                    <input type="text" id="inputTrigger" />
+                    <button type="submit" id="addTrigger">Quick Add</button>
+                </form>
+            </div>
+            <p id="quickAddMessage"></p>
             <br />
-            <form name="quickAddForm">
-                <input type="text" id="inputTrigger" />
-                <button type="submit" id="addTrigger">Quick Add</button>
-            </form>
+            <p><a href="options.html" target="_blank">Configure and Manage Trigger List</a></p>
         </div>
-        <p id="quickAddMessage"></p>
-        <br />
-        <p><a href="options.html" target="_blank">Configure and Manage Trigger List</a></p>
-    </div>
+    </main>
     <script src="../js/common.js"></script>
     <script src="../js/popup.js"></script>
 </body>
