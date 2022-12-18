@@ -23,7 +23,6 @@ function main() {
 		}
 		observer = new MutationObserver(callback);
 		observer.observe(basalNode, moConfig);
-		console.log("activating", basalNode)
 	})
 }
 

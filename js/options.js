@@ -46,7 +46,6 @@ function addToTriggerList(trigger) {
             index = newTriggers.indexOf(trigger)
             newTriggers.splice(index, 1)
             storageSet({ "triggers": newTriggers }, function () {
-                console.log("Value is set to " + newTriggers);
                 tl.removeChild(div1)
                 tl.removeChild(div2)
             });

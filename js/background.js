@@ -11,7 +11,6 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
     if (isValidInput(newTrigger)) {
         storageGet(["triggers"], function (config) {
             if (!config.triggers) { config.triggers = [] }
-            console.log(config)
             newTriggers = config.triggers
             newTriggers.push(newTrigger)
             storageSet({ "triggers": newTriggers }, function () {

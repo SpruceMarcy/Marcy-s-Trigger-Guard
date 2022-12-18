@@ -17,8 +17,5 @@ function storageSet(data, callback) {
 }
 
 function isValidInput(word) {
-    if (word.length == 0) {
-        return false
-    }
-    return true
+    return word && word.length && word.trim().length
 }
