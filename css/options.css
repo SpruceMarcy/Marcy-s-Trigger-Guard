@@ -53,6 +53,11 @@ h3 {
     text-align: center;
 }
 
+h4 {
+    margin: 0;
+    margin-bottom: 0.5em;
+}
+
 .centered {
     display: table;
     margin-left: auto;
@@ -60,8 +65,12 @@ h3 {
 }
 
 #optionGrid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
     display: grid;
+}
+
+#optionGrid>* {
+    margin: 0.5em;
 }
 
 #optionGrid label {
@@ -79,7 +88,9 @@ h3 {
     margin: 0.5em;
 }
 
-input[name="collapse"] {
+input[name="collapse"],
+input[type="radio"],
+input[type="checkbox"] {
     display: none;
 }
 
@@ -88,14 +99,23 @@ input[name="collapse"] {
     width: 100%;
     padding: 10px;
     display: block;
+    border-left: 0 solid #3dce4a;
+    transition: border-left 0.5s;
 }
 
-.button:hover {
+input[type="radio"]:not(:checked)+.button:hover,
+input[type="checkbox"]+.button:hover {
     background-color: rgb(230, 230, 212);
+    cursor: pointer;
 }
 
-.button:active {
+input[type="radio"]:not(:checked)+.button:active,
+input[type="checkbox"]+.button:active {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+}
+
+input:checked+label.button {
+    border-left: 1em solid #3dce4a;
 }
 
 input[type="radio"]:checked {

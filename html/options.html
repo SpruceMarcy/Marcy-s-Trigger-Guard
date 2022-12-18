@@ -26,38 +26,40 @@
         <div class="centered">
             <div id="optionGrid">
                 <div>
+                    <h4>Behaviour</h4>
+                    <input type="checkbox" id="caseSensitive" name="caseSensitive" value="true">
                     <label for="caseSensitive" class="button">
-                        <input type="checkbox" id="caseSensitive" name="caseSensitive" value="true">
                         Case Sensitive
                     </label>
                 </div>
                 <div>
+                    <h4>Replacement</h4>
+                    <input type="radio" id="blackoutAll" name="censorOption" value="blackoutAll">
                     <label for="blackoutAll" class="button">
-                        <input type="radio" id="blackoutAll" name="censorOption" value="blackoutAll">
                         Blackout with fixed length
                         <br>
                         <dd>every trigger becomes "█████"</dd>
                     </label>
+                    <input type="radio" id="blackoutPer" name="censorOption" value="blackoutPer">
                     <label for="blackoutPer" class="button">
-                        <input type="radio" id="blackoutPer" name="censorOption" value="blackoutPer">
                         Blackout with varying length
                         <br>
                         <dd>"abc" becomes "███" and "abcdef" becomes "██████"</dd>
                     </label>
+                    <input type="radio" id="underscoreAll" name="censorOption" value="underscoreAll">
                     <label for="underscoreAll" class="button">
-                        <input type="radio" id="underscoreAll" name="censorOption" value="underscoreAll">
                         Dashes with fixed length
                         <br>
                         <dd>every trigger becomes "-----"</dd>
                     </label>
+                    <input type="radio" id="underscorePer" name="censorOption" value="underscorePer">
                     <label for="underscorePer" class="button">
-                        <input type="radio" id="underscorePer" name="censorOption" value="underscorePer">
                         Dashes with varying length
                         <br>
                         <dd>"abc" becomes "---" and "abcdef" becomes "------"</dd>
                     </label>
+                    <input type="radio" id="customCensor" name="censorOption" value="customCensor">
                     <label for="customCensor" class="button">
-                        <input type="radio" id="customCensor" name="censorOption" value="customCensor">
                         Custom censor:
                         <input type="text" id="customCensorValue">
                     </label>
