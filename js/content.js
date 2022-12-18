@@ -43,7 +43,7 @@ function censorTextNode(node, config) {
 		tokenisedText = tokenise(text, config)
 		allMatches = allMatches.concat(findAll(tokenisedText, trigger, config))
 	})
-	allMatches.sort((a, b) => { return a['i'] - b['i'] });
+	allMatches.sort((a, b) => { return (a['i'] - b['i'] || a['l'] - b['l']) });
 	text = censorAtIndices(text, allMatches)
 	node.nodeValue = text
 }
