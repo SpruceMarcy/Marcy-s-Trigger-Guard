@@ -94,9 +94,15 @@ handleCustomCensor = function () {
 customCensorRadio.onchange = handleCustomCensor
 customCensorTextbox.oninput = handleCustomCensor
 
+dtCheckbox = $("doTrim")
+dtCheckbox.addEventListener('change', (event) => {
+    storageSet({ "doTrim": event.currentTarget.checked }, null);
+})
+
 // Set defaults
-storageGet(["caseSensitive"], function (config) {
+storageGet(["caseSensitive", "doTrim"], function (config) {
     csCheckbox.checked = config.caseSensitive
+    dtCheckbox.checked = config.doTrim
 })
 
 storageGet(["censorOption", "censorValue"], function (config) {
