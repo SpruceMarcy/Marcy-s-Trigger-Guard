@@ -1,3 +1,14 @@
+storageGet(["setup"], function(config){
+    if (config.setup) { return }
+    storageSet(
+        {
+            "censorOption": "Per",
+            "censorValue": "█",
+            "caseSensitive": false,
+            "setup": true
+        }, null)
+})
+
 chrome.runtime.onInstalled.addListener(function () {
     chrome.contextMenus.create({
         "title": 'Block "%s"',

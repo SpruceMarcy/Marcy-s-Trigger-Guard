@@ -115,8 +115,8 @@ storageGet(["censorOption", "censorValue"], function (config) {
                 underscorePerRadio.checked = true
             }
             break;
-        default:
+        case "Custom":
             customCensorRadio.checked = true
-            customCensorTextbox.value = config.censorValue
+            customCensorTextbox.value = config.censorValue ? config.censorValue : ""
     }
 })
