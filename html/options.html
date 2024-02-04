@@ -131,10 +131,78 @@
         <div class="centered">
             <input type="checkbox" id="doTrim" name="doTrim" value="true">
             <label for="doTrim" class="button">
-                Remove whitespace from selections 
+                Remove whitespace from page selections 
             </label>
         </div>
     </main>
+    <template id="listItemTemplate">
+        <div>
+            <p id="triggerEntryText"></p>
+        </div>
+        <div>
+            <p><a id="deleteButton" href="javascript:void(0)">delete</a></p>
+        </div>
+        <div>
+            <select id="defaultDropdown">
+              <option value="default">Use Defaults</option>
+              <option value="custom">Custom Settings</option>
+            </select> 
+        </div>
+        <div>
+            <p><a id="settingsButton" href="javascript:void(0)">settings</a></p>
+        </div>
+        <div class="hiddenSettingsRow" id="collapseSettings">
+            <div id="optionGrid">
+                <div>
+                    <h4>Behaviour</h4>
+                    <input type="checkbox" id="caseSensitiveLI" name="caseSensitiveLI" value="true">
+                    <label for="caseSensitiveLI" class="button">
+                        Case Sensitive
+                    </label>
+                    <input type="checkbox" id="entireWordLI" name="entireWordLI" value="true" disabled>
+                    <label for="entireWordLI" class="button">
+                        Censor entire word [WIP]
+                    </label>
+                    <input type="checkbox" id="entireSentenceLI" name="entireSentenceLI" value="true" disabled>
+                    <label for="entireSentenceLI" class="button">
+                        Censor entire sentence [WIP]
+                    </label>
+                </div>
+                <div>
+                    <h4>Replacement</h4>
+                    <input type="radio" id="blackoutAllLI" name="censorOptionLI" value="blackoutAll">
+                    <label for="blackoutAllLI" class="button">
+                        <span>
+                            Blackout with fixed length
+                        </span>
+                    </label>
+                    <input type="radio" id="blackoutPerLI" name="censorOptionLI" value="blackoutPer">
+                    <label for="blackoutPerLI" class="button">
+                        <span>
+                            Blackout with varying length
+                        </span>
+                    </label>
+                    <input type="radio" id="underscoreAllLI" name="censorOptionLI" value="underscoreAll">
+                    <label for="underscoreAllLI" class="button">
+                        <span>
+                            Dashes with fixed length
+                        </span>
+                    </label>
+                    <input type="radio" id="underscorePerLI" name="censorOptionLI" value="underscorePer">
+                    <label for="underscorePerLI" class="button">
+                        <span>
+                            Dashes with varying length
+                        </span>
+                    </label>
+                    <input type="radio" id="customCensorLI" name="censorOptionLI" value="customCensor">
+                    <label for="customCensorLI" class="button">
+                        Custom censor:
+                        <input type="text" id="customCensorValueLI">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </template>
     <script src="../js/common.js"></script>
     <script src="../js/options.js"></script>
 </body>

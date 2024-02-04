@@ -10,6 +10,7 @@ body {
 }
 
 main {
+    min-width: fit-content;
     background-color: lightcyan;
     margin: 2em;
     padding: 2em;
@@ -66,8 +67,24 @@ h4 {
 }
 
 .grid {
-    grid-template-columns: auto min-content;
+    min-width: 50em;
+    grid-column-gap: 1em;
+    grid-template-columns: auto min-content min-content min-content;
     display: grid;
+}
+.grid>div>*{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.hiddenSettingsRow{
+    grid-column: span 4;
+    background-color: lightcyan;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+    overflow: hidden;
+    height: 0;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .logo img {
@@ -121,6 +138,8 @@ input[type="radio"]:checked {
 
 input[name="collapse"]:checked~#triggerList {
     height: auto;
+    padding-top: 3px;
+    padding-bottom: 15px;
 }
 
 .helpLabel {

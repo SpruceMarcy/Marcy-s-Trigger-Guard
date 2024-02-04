@@ -1,5 +1,5 @@
 function main() {
-	storageGet(["triggers", "caseSensitive", "censorValue", "censorOption"], function (config) {
+	storageGet(["triggers", "triggerConfigs", "caseSensitive", "censorValue", "censorOption"], function (config) {
 		if (!config.triggers) { return }
 
 		tokeniseTriggers(config)
@@ -42,9 +42,12 @@ function textNodesUnder(el) {
 function censorTextNode(node, config) {
 	text = node.nodeValue
 	allMatches = []
-	config.triggers.forEach(trigger => {
-		tokenisedText = tokenise(text, config)
-		allMatches = allMatches.concat(findAll(tokenisedText, trigger, config))
+	config.triggers.forEach((trigger, index) => {
+		triggerConfig = config.triggerConfigs[index]
+		configUsed = triggerConfig
+		if (triggerConfig.useDefaults){ configUsed = config }
+		tokenisedText = tokenise(text, configUsed)
+		allMatches = allMatches.concat(findAll(tokenisedText, trigger, configUsed))
 	})
 	if (allMatches.length != 0) {
 		allMatches.sort((a, b) => { return (a['i'] - b['i'] || a['l'] - b['l']) });
@@ -80,8 +83,11 @@ function censorAtIndices(str, indices) {
 
 function tokeniseTriggers(config) {
 	tokenisedTriggers = []
-	config.triggers.forEach(trigger => {
-		tokenisedTriggers.push(tokenise(trigger, config))
+	config.triggers.forEach((trigger, index) => {
+		triggerConfig = config.triggerConfigs[index]
+		configUsed = triggerConfig
+		if (triggerConfig.useDefaults){ configUsed = config }
+		tokenisedTriggers.push(tokenise(trigger, configUsed))
 	})
 	config.triggers = tokenisedTriggers
 }

@@ -1,12 +1,21 @@
 $ = function (e) { return document.getElementById(e) }
 $("addTrigger").onclick = function () {
     newTrigger = $("inputTrigger").value
+    newTriggerConfig = {
+        "useDefaults":true,
+        "censorOption": "Per",
+        "censorValue": "█",
+        "caseSensitive": false,
+    }
     if (isValidInput(newTrigger)) {
-        storageGet(["triggers"], function (config) {
+        storageGet(["triggers", "triggerConfigs"], function (config) {
             if (!config.triggers) { config.triggers = [] }
+            if (!config.triggerConfigs) { config.triggerConfigs = [] }
             newTriggers = config.triggers
             newTriggers.push(newTrigger)
-            storageSet({ "triggers": newTriggers }, function () {
+            newTriggerConfigs = config.triggerConfigs
+            newTriggerConfigs.push(newTriggerConfig)
+            storageSet({ "triggers": newTriggers, "triggerConfigs":newTriggerConfigs }, function () {
                 $("inputTrigger").value = ""
                 $("quickAddMessage").innerText = "Phrase successfully added"
                 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
