@@ -1,5 +1,5 @@
 function main() {
-	storageGet(["triggers", "triggerConfigs", "caseSensitive", "censorValue", "censorOption"], function (config) {
+	storageGet(["triggers", "triggerConfigs", "caseSensitive", "censorValue", "censorOption", "censorExtent"], function (config) {
 		if (!config.triggers) { return }
 
 		tokeniseTriggers(config)
@@ -33,7 +33,7 @@ function mutateTextNodesUnder(node, config) {
 }
 
 function textNodesUnder(el) {
-	filter = (node) => (['script', 'style'].includes(node.parentNode.tagName.toLowerCase()) || node.nodeValue.trim() === '' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
+	filter = (node) => (['script', 'style', 'meta'].includes(node.parentNode.tagName.toLowerCase()) || node.nodeValue.trim() === '' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT);
 	var n, a = [], walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, filter, false);
 	while (n = walk.nextNode()) a.push(n);
 	return a;
@@ -59,9 +59,55 @@ function censorTextNode(node, config) {
 function findAll(str, substr, config) {
 	matches = []
 	caret = 0
-	censorValue = config.censorOption === "Per" ? config.censorValue.repeat(substr.length) : config.censorValue
+	const regex1 = /[^.!?\s][^.!?\n]*(?:[.!?](?!['"]?\s|$)[^.!?]*)*[.!?]?['"]?(?=\s|$)/g
+	let result;
+	sentenceIndices = []
+	while ((result = regex1.exec(str)) !== null) {
+	  sentenceIndices.push(result.index)
+	}	  
+	sentenceIndices.push(str.length)
+
+
 	while ((index = str.indexOf(substr, caret)) > -1) {
-		matches.push({ 'i': index, 'l': substr.length, 'c': censorValue })
+		match = { 'i': index, 'l': substr.length, 'c': "" }
+		doMatch = true
+		switch (config.censorExtent){
+			case "exact":
+				if (index > 0 && "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(str.charAt(index-1))){
+					doMatch = false
+					break
+				}
+				if (index+substr.length < str.length && "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(str.charAt(index+substr.length))){
+					doMatch = false
+					break
+				}	
+			case "substring":
+				break;
+			case "word":
+				wordStart = str.lastIndexOf(" ", index) + 1
+				wordEnd = str.indexOf(" ", index+substr.length)
+				wordEnd = wordEnd == -1? str.length : wordEnd
+				match['i'] = wordStart
+				match['l'] = wordEnd - wordStart
+				break;
+			case "sentence":
+				wordStart = 0
+				wordEnd = str.length
+				for (let i = 0; i < sentenceIndices.length; i++) {
+					if (sentenceIndices[i]>index){
+						wordStart = sentenceIndices[i-1]
+						wordEnd = sentenceIndices[i]
+					}
+					break
+				}
+				match['i'] = wordStart
+				match['l'] = wordEnd - wordStart
+				break;
+		}
+		if (doMatch){
+			match['c'] = config.censorOption === "Per" ? config.censorValue.repeat(match['l']) : config.censorValue
+			matches.push(match)
+		}
 		caret = index + 1
 	}
 	return matches

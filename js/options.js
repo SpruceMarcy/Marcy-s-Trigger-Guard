@@ -5,6 +5,7 @@ $("addTrigger").onclick = function () {
         "useDefaults":true,
         "censorOption": "Per",
         "censorValue": "█",
+        "censorExtent": "substring",
         "caseSensitive": false,
     }
     if (isValidInput(newTrigger)) {
@@ -94,6 +95,15 @@ function addToTriggerList(trigger, triggerConfig) {
     customCensorRadioLI.onchange = handleCustomCensor
     customCensorTextboxLI.oninput = handleCustomCensor
 
+    let extentExactRadioLI = $$("extentExactLI")
+    extentExactRadioLI.onchange = function () { triggerConfigSet(trigger, { "censorExtent": "exact"}) }
+    let extentSubstringRadioLI = $$("extentSubstringLI")
+    extentSubstringRadioLI.onchange = function () { triggerConfigSet(trigger, { "censorExtent": "substring"}) }
+    let extentWordRadioLI = $$("extentWordLI")
+    extentWordRadioLI.onchange = function () { triggerConfigSet(trigger, { "censorExtent": "word"}) }
+    let extentSentenceRadioLI = $$("extentSentenceLI")
+    extentSentenceRadioLI.onchange = function () { triggerConfigSet(trigger, { "censorExtent": "sentence"}) }
+
     triggerConfigGet(trigger, function(result){
         csCheckboxLI.checked = result.caseSensitive
         switch (result.censorOption) {
@@ -114,6 +124,20 @@ function addToTriggerList(trigger, triggerConfig) {
             case "Custom":
                 customCensorRadioLI.checked = true
                 customCensorTextboxLI.value = result.censorValue ? result.censorValue : ""
+        }
+        switch (result.censorExtent){
+            case "exact":
+                extentExactRadioLI.checked = true
+                break;
+            case "substring":
+                extentSubstringRadioLI.checked = true
+                break;
+            case "word":
+                extentWordRadioLI.checked = true
+                break;
+            case "sentence":
+                extentSentenceRadioLI.checked = true
+                break;
         }
     })
 
@@ -214,6 +238,15 @@ handleCustomCensor = function () {
 customCensorRadio.onchange = handleCustomCensor
 customCensorTextbox.oninput = handleCustomCensor
 
+extentExactRadio = $("extentExact")
+extentExactRadio.onchange = function () { storageSet({ "censorExtent": "exact"}, null) }
+extentSubstringRadio = $("extentSubstring")
+extentSubstringRadio.onchange = function () { storageSet({ "censorExtent": "substring"}, null) }
+extentWordRadio = $("extentWord")
+extentWordRadio.onchange = function () { storageSet({ "censorExtent": "word"}, null) }
+extentSentenceRadio = $("extentSentence")
+extentSentenceRadio.onchange = function () { storageSet({ "censorExtent": "sentence"}, null) }
+
 dtCheckbox = $("doTrim")
 dtCheckbox.addEventListener('change', (event) => {
     storageSet({ "doTrim": event.currentTarget.checked }, null);
@@ -225,7 +258,7 @@ storageGet(["caseSensitive", "doTrim"], function (config) {
     dtCheckbox.checked = config.doTrim
 })
 
-storageGet(["censorOption", "censorValue"], function (config) {
+storageGet(["censorOption", "censorValue", "censorExtent"], function (config) {
     switch (config.censorOption) {
         case "All":
             if (config.censorValue === "█████") {
@@ -244,5 +277,19 @@ storageGet(["censorOption", "censorValue"], function (config) {
         case "Custom":
             customCensorRadio.checked = true
             customCensorTextbox.value = config.censorValue ? config.censorValue : ""
+    }
+    switch (config.censorExtent){
+        case "exact":
+            extentExactRadio.checked = true
+            break;
+        case "substring":
+            extentSubstringRadio.checked = true
+            break;
+        case "word":
+            extentWordRadio.checked = true
+            break;
+        case "sentence":
+            extentSentenceRadio.checked = true
+            break;
     }
 })

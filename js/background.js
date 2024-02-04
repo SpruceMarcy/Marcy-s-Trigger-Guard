@@ -15,6 +15,7 @@ storageGet(["setup", "censorOption", "censorValue", "triggers", "triggerConfigs"
                 "useDefaults":true,
                 "censorOption": "Per",
                 "censorValue": "█",
+                "censorExtent": "substring",
                 "caseSensitive": false,
             })
         } 
@@ -22,6 +23,7 @@ storageGet(["setup", "censorOption", "censorValue", "triggers", "triggerConfigs"
     storageSet(
         {
             "caseSensitive": false,
+            "censorExtent": "substring",
             "doTrim": true,
             "triggers":config.triggers,
             "triggerConfigs":config.triggerConfigs,
@@ -43,6 +45,7 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
         "useDefaults":true,
         "censorOption": "Per",
         "censorValue": "█",
+        "censorExtent": "substring",
         "caseSensitive": false,
     }
     if (isValidInput(newTrigger)) {

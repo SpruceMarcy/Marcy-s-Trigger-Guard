@@ -31,13 +31,31 @@
                     <label for="caseSensitive" class="button">
                         Case Sensitive
                     </label>
-                    <input type="checkbox" id="entireWord" name="entireWord" value="true" disabled>
-                    <label for="entireWord" class="button">
-                        Censor entire word [WIP]
+                    <br />
+                    <h4>Censor Rules</h4>
+                    <input type="radio" id="extentExact" name="censorExtent" value="exact">
+                    <label for="extentExact" class="button">
+                        <span>
+                            Censor standalone trigger phrases
+                        </span>
                     </label>
-                    <input type="checkbox" id="entireSentence" name="entireSentence" value="true" disabled>
-                    <label for="entireSentence" class="button">
-                        Censor entire sentence [WIP]
+                    <input type="radio" id="extentSubstring" name="censorExtent" value="substring">
+                    <label for="extentSubstring" class="button">
+                        <span>
+                            Censor trigger phrases within other words
+                        </span>
+                    </label>
+                    <input type="radio" id="extentWord" name="censorExtent" value="word">
+                    <label for="extentWord" class="button">
+                        <span>
+                            Censor entire words containing trigger phrases
+                        </span>
+                    </label>
+                    <input type="radio" id="extentSentence" name="censorExtent" value="sentence">
+                    <label for="extentSentence" class="button">
+                        <span>
+                            Censor entire sentences containing trigger phrases
+                        </span>
                     </label>
                 </div>
                 <div>
@@ -159,13 +177,31 @@
                     <label for="caseSensitiveLI" class="button">
                         Case Sensitive
                     </label>
-                    <input type="checkbox" id="entireWordLI" name="entireWordLI" value="true" disabled>
-                    <label for="entireWordLI" class="button">
-                        Censor entire word [WIP]
+                    <br />
+                    <h4>Censor Rules</h4>
+                    <input type="radio" id="extentExactLI" name="censorExtentLI" value="exact">
+                    <label for="extentExactLI" class="button">
+                        <span>
+                            Censor this trigger phrase when standalone
+                        </span>
                     </label>
-                    <input type="checkbox" id="entireSentenceLI" name="entireSentenceLI" value="true" disabled>
-                    <label for="entireSentenceLI" class="button">
-                        Censor entire sentence [WIP]
+                    <input type="radio" id="extentSubstringLI" name="censorExtentLI" value="substring">
+                    <label for="extentSubstringLI" class="button">
+                        <span>
+                            Censor this trigger phrase within other words
+                        </span>
+                    </label>
+                    <input type="radio" id="extentWordLI" name="censorExtentLI" value="word">
+                    <label for="extentWordLI" class="button">
+                        <span>
+                            Censor entire words containing this trigger phrase
+                        </span>
+                    </label>
+                    <input type="radio" id="extentSentenceLI" name="censorExtentLI" value="sentence">
+                    <label for="extentSentenceLI" class="button">
+                        <span>
+                            Censor entire sentences containing this trigger phrase
+                        </span>
                     </label>
                 </div>
                 <div>

@@ -5,6 +5,7 @@ $("addTrigger").onclick = function () {
         "useDefaults":true,
         "censorOption": "Per",
         "censorValue": "█",
+        "censorExtent": "substring",
         "caseSensitive": false,
     }
     if (isValidInput(newTrigger)) {
